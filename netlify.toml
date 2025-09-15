@@ -1,0 +1,34 @@
+[[redirects]]
+# Redirect legacy or broken paths to their new equivalents. This helps avoid 404s
+# for visitors who have bookmarked old URLs or clicked outdated links.
+# Each redirect uses a 200 (OK) status so the browser doesn’t change the URL,
+# allowing single‑page apps to handle navigation internally if desired.
+from = "/blaze-championship-live"
+to   = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/index-championship-ultimate"
+to   = "/analytics.html"
+status = 200
+
+[[redirects]]
+from = "/championship-3d-universe"
+to   = "/universe.html"
+status = 200
+
+[[redirects]]
+from = "/championship-ai-analytics"
+to   = "/analytics.html"
+status = 200
+
+# Provide clean extensionless URLs for analytics and universe
+[[redirects]]
+from = "/analytics"
+to   = "/analytics.html"
+status = 200
+
+[[redirects]]
+from = "/universe"
+to   = "/universe.html"
+status = 200

@@ -1,0 +1,121 @@
+{
+  "summary": {
+    "timestamp": "2025-09-13T01:45:20.117Z",
+    "totalTests": 10,
+    "passed": 4,
+    "failed": 6,
+    "duration": 6527
+  },
+  "tests": [
+    {
+      "name": "Health Endpoint",
+      "details": {
+        "status": 200,
+        "services": 0,
+        "uptime": 227.455740531
+      },
+      "timestamp": "2025-09-13T01:45:13.617Z"
+    },
+    {
+      "name": "AI Consciousness Status",
+      "passed": {
+        "pressureAnalysis": {
+          "temperature": 0.7,
+          "topP": 0.9
+        },
+        "clutchPrediction": {
+          "confidence": 0.85,
+          "lookahead": 3
+        },
+        "momentumDetection": {
+          "sensitivity": 0.75,
+          "smoothing": 0.6
+        },
+        "biometricAnalysis": {
+          "precision": 0.95,
+          "frameRate": 30
+        }
+      },
+      "details": {
+        "status": 200,
+        "neuralSensitivity": 76.61342247558366,
+        "activeConnections": 24,
+        "models": 4
+      },
+      "timestamp": "2025-09-13T01:45:13.624Z"
+    },
+    {
+      "name": "NIL Calculator AI Processing",
+      "passed": true,
+      "details": {
+        "status": 200,
+        "estimatedValue": 160903,
+        "confidenceScore": 95,
+        "hasAIInsights": true,
+        "authorityFactors": true,
+        "processingTime": null
+      },
+      "timestamp": "2025-09-13T01:45:19.346Z"
+    },
+    {
+      "name": "NIL Social Media Validation",
+      "passed": false,
+      "details": {
+        "error": "Unexpected token T in JSON at position 0"
+      },
+      "timestamp": "2025-09-13T01:45:19.352Z"
+    },
+    {
+      "name": "Digital Combine Demo Analysis",
+      "passed": false,
+      "details": {
+        "error": "Unexpected token T in JSON at position 0"
+      },
+      "timestamp": "2025-09-13T01:45:19.358Z"
+    },
+    {
+      "name": "WebSocket Streaming",
+      "passed": true,
+      "details": {
+        "connected": true,
+        "streamingData": true,
+        "messagesReceived": 3,
+        "lastMessageType": "pressure_stream"
+      },
+      "timestamp": "2025-09-13T01:45:20.081Z"
+    },
+    {
+      "name": "Sports Data APIs",
+      "passed": false,
+      "details": {
+        "status": 429,
+        "contentType": "text/html; charset=utf-8",
+        "note": "BallDontLie API running in fallback mode (no 401 spam detected)"
+      },
+      "timestamp": "2025-09-13T01:45:20.087Z"
+    },
+    {
+      "name": "Database Connectivity",
+      "details": {},
+      "timestamp": "2025-09-13T01:45:20.094Z"
+    },
+    {
+      "name": "API Rate Limiting",
+      "passed": true,
+      "details": {
+        "rateLimit": "100",
+        "remaining": "0",
+        "hasHeaders": true
+      },
+      "timestamp": "2025-09-13T01:45:20.107Z"
+    },
+    {
+      "name": "Error Handling",
+      "passed": false,
+      "details": {
+        "error": "Unexpected token T in JSON at position 0"
+      },
+      "timestamp": "2025-09-13T01:45:20.114Z"
+    }
+  ]
+}

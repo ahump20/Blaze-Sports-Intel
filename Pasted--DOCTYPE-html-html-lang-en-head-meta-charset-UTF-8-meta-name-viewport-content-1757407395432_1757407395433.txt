@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Chaos: Underdog Uprising Strikes Again | Blaze Intelligence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --tennessee-deep: #002244;
+            --vancouver-teal: #00B2A9;
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+            --pearl: #FAFAFA;
+            --dark-bg: #0A0F1C;
+            --card-bg: rgba(0, 34, 68, 0.3);
+            --glow-orange: rgba(191, 87, 0, 0.3);
+            --glow-blue: rgba(155, 203, 235, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0F1823 50%, var(--tennessee-deep) 100%);
+            color: var(--platinum);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 34, 68, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--burnt-orange);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 24px rgba(191, 87, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--platinum) 0%, var(--cardinal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--cardinal-blue);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--platinum);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Quick Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--cardinal-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        /* Content Container */
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(0, 34, 68, 0.2);
+            border-radius: 16px;
+            padding: 3rem;
+            border: 1px solid rgba(155, 203, 235, 0.1);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--burnt-orange);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--burnt-orange), var(--cardinal-blue));
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: var(--cardinal-blue);
+        }
+
+        /* Game Cards */
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.2);
+            border-color: var(--burnt-orange);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+        }
+
+        .game-score {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--platinum);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .upset-badge {
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Analytics Box */
+        .analytics-box {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(155, 203, 235, 0.1));
+            border: 1px solid var(--burnt-orange);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .analytics-box h4 {
+            color: var(--burnt-orange);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .analytics-box h4::before {
+            content: '📊';
+        }
+
+        /* Performance Metrics */
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-title {
+            font-size: 0.9rem;
+            color: var(--cardinal-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-player {
+            font-size: 1.1rem;
+            color: var(--platinum);
+            font-weight: 600;
+        }
+
+        .metric-details {
+            font-size: 0.9rem;
+            color: var(--platinum);
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.2);
+        }
+
+        /* Rankings List */
+        .rankings-list {
+            list-style: none;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .ranking-item:hover {
+            background: rgba(191, 87, 0, 0.05);
+            margin: 0 -0.5rem;
+            padding: 0.8rem 0.5rem;
+        }
+
+        .ranking-number {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 30px;
+        }
+
+        .ranking-team {
+            flex: 1;
+            font-weight: 600;
+            color: var(--platinum);
+        }
+
+        .ranking-change {
+            font-size: 0.85rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .ranking-up {
+            color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .ranking-down {
+            color: #EF4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .ranking-new {
+            color: var(--vancouver-teal);
+            background: rgba(0, 178, 169, 0.1);
+        }
+
+        /* Lists */
+        ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">BLAZE INTELLIGENCE</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/analytics">Analytics</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="hero-label">Week 2 Analysis</span>
+        <h1>Underdog Uprising: Week 2 Chaos Strikes Again</h1>
+        <div class="hero-meta">
+            <span>📅 September 9, 2025</span>
+            <span>📊 Blaze Intelligence Analytics</span>
+            <span>⏱️ 15 min read</span>
+        </div>
+        <p class="hero-subtitle">
+            Baylor shocks No. 17 SMU in double OT, South Florida stuns No. 13 Florida, Mississippi State upsets No. 12 Arizona State, and No. 18 Oklahoma outguns No. 15 Michigan. The chaos continues with six teams topping 60 points in offensive explosions.
+        </p>
+    </section>
+
+    <!-- Quick Stats Bar -->
+    <div class="stats-bar" style="max-width: 1400px; margin: 0 auto 3rem;">
+        <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Major Upsets</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">6</div>
+            <div class="stat-label">60+ Point Games</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">94</div>
+            <div class="stat-label">Top ShowIQ Rating</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">2OT</div>
+            <div class="stat-label">Thriller Finish</div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="content-container">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Shocking Upset Section -->
+            <section class="section">
+                <h2>Shocking Upset in the Swamp</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">South Florida 18, #13 Florida 16</div>
+                        <span class="upset-badge">⚠️ MAJOR UPSET</span>
+                    </div>
+                    <p>A walk-off 42-yard field goal sent The Swamp into silence as South Florida delivered the most shocking result of Week 2. The Bulls' defense forced three turnovers and held Florida without a touchdown for the final 28 minutes, setting the stage for kicker John Cannon's game-winning boot as time expired.</p>
+                    
+                    <p>This is USF's second straight win over a ranked opponent, after blowing out then-No. 25 Boise State 34-7 in Week 1. It's also the first time in program history the Bulls have beaten ranked teams in back-to-back weeks, vaulting them into the AP poll at No. 18 – their highest ranking since 2017.</p>
+                    
+                    <div class="analytics-box">
+                        <h4>Blaze Intelligence Analysis</h4>
+                        <p>Florida entered as nearly three-touchdown favorites but never found offensive rhythm. Second-year coach Billy Napier faces mounting pressure, as an SEC contender just saw its playoff hopes derailed in September. Credit goes to USF's veteran quarterback Byrum Brown (250+ all-purpose yards) and a swarming defense that tallied 4 sacks and a critical red-zone interception.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Double OT Drama -->
+            <section class="section">
+                <h2>Double-Overtime Drama</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">Baylor 48, #17 SMU 45 (2OT)</div>
+                        <span class="upset-badge">THRILLER</span>
+                    </div>
+                    <p>In a Texas-sized thriller, Baylor rallied from 14 points down in the fourth quarter to knock off 17th-ranked SMU in double overtime. Quarterback Sawyer Robertson was the hero, erupting for 440 yards passing and 4 touchdowns. He threw two TDs in the final 5:30 of regulation to erase SMU's 38-24 lead, then engineered two overtime scoring drives.</p>
+                    
+                    <p>Baylor's kicker Connor Hawkins sealed it with a 27-yard field goal in 2OT, triggering a Bears celebration in Dallas. This upset showcased Baylor's resilience and clutch gene. The Bears' defense made a stand in the second OT, forcing SMU into a missed field goal, which opened the door for the walk-off win.</p>
+                    
+                    <p>The victory extends Baylor's win streak over SMU to 14 straight meetings dating back to 1986, a testament to this old Southwest Conference rivalry's one-sided nature. For SMU, which entered the ACC this year with playoff aspirations, the loss is a gut punch – their first regular-season setback after a Cinderella 2024.</p>
+                </div>
+            </section>
+
+            <!-- Sooners Statement -->
+            <section class="section">
+                <h2>Sooners Stake Their Claim</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">#18 Oklahoma 24, #15 Michigan 13</div>
+                        <span class="upset-badge">RANKED SHOWDOWN</span>
+                    </div>
+                    <p>In the week's only ranked-versus-ranked showdown, Oklahoma delivered a methodical victory that announces the Sooners as real contenders. Quarterback John Mateer had a breakout performance, tallying 344 total yards and 3 TDs while torching Michigan's vaunted defense.</p>
+                    
+                    <p>Mateer's dual-threat play – including several Houdini escapes from pressure – energized a Sooners offense that controlled the clock and the scoreboard. He carved up the Wolverines with accurate mid-range passing and timely scrambles, planting his flag in the early Heisman race with an impressive stat line in prime time.</p>
+                    
+                    <div class="analytics-box">
+                        <h4>Blaze Intelligence Pattern Recognition</h4>
+                        <p>This game highlighted Oklahoma's offensive balance and creative play-calling. The Sooners led in time of possession by +10 minutes and converted 8/16 on third-down, wearing down Michigan's defense. Mateer's performance underscores a larger trend: elite quarterback play is separating contenders from pretenders in 2025. If Oklahoma can carry this momentum into conference play, they suddenly look like a dark-horse playoff contender.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cowbell Chaos -->
+            <section class="section">
+                <h2>Cowbell Chaos in Starkville</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">Mississippi State 24, #12 Arizona State 20</div>
+                        <span class="upset-badge">HISTORIC WIN</span>
+                    </div>
+                    <p>In Starkville, the cowbells rang loud and late into the night as the unranked Bulldogs knocked off a Top-15 Pac-12 opponent. Mississippi State quarterback Blake Shapen – a transfer facing his former team's conference rival – uncorked a 58-yard touchdown bomb to WR Brenen Thompson that sealed the win in the final minutes.</p>
+                    
+                    <p>That clutch strike broke a 17-20 deficit, turning a tense upset bid into a historic victory. In fact, it was MSU's first home non-conference win over a ranked opponent since 1991, sending the cowbell-clanging fans at Davis Wade Stadium into a frenzy.</p>
+                    
+                    <p>Arizona State, touted by some as a CFP dark horse, led 20-17 late in the fourth quarter but couldn't close. The Sun Devils struggled with turnovers (including a red-zone fumble) and were shut out in the final quarter. The upset knocked Arizona State completely out of the Top 25.</p>
+                </div>
+            </section>
+
+            <!-- Analytics Leaderboard -->
+            <section class="section">
+                <h2>Week 2 Analytics Leaderboard</h2>
+                <div class="performance-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">ShowIQ Rating</span>
+                        </div>
+                        <div class="metric-value">94</div>
+                        <div class="metric-player">John Mateer, OU</div>
+                        <div class="metric-details">Elite decision-making vs Michigan with 3 TDs, 0 turnovers</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Pressure Index</span>
+                        </div>
+                        <div class="metric-value">90</div>
+                        <div class="metric-player">Blake Shapen, MSST</div>
+                        <div class="metric-details">Ice-cold 58-yd game-winning TD under heavy rush</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Clutch Grade</span>
+                        </div>
+                        <div class="metric-value">A+</div>
+                        <div class="metric-player">Connor Hawkins, BAY</div>
+                        <div class="metric-details">27-yard FG in double OT to beat ranked SMU</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other Notables -->
+            <section class="section">
+                <h2>Other Notable Results</h2>
+                
+                <h3>Border War Bravado</h3>
+                <p><strong>Missouri 42, Kansas 31:</strong> The historic Missouri–Kansas rivalry (dubbed the "Border War") returned and did not disappoint. In a back-and-forth shootout, Mizzou RB Jamal Roberts broke free for a 63-yard touchdown run late in the fourth quarter to ice the game. The Tigers' victory earned them a spot in the AP Top 25 at No. 25.</p>
+                
+                <h3>Mountain West Magic</h3>
+                <p><strong>Fresno State 36, Oregon State 27:</strong> Another Power Five program fell victim to a so-called underdog, as Fresno State took down Oregon State. The Bulldogs sealed the upset with a defensive highlight – a 72-yard pick-six by DB Jakari Spears in the closing minutes.</p>
+                
+                <h3>Top Teams Roll (Mostly)</h3>
+                <p>Six teams exploded for 60+ points against overmatched opponents. Notable blowouts included:</p>
+                <ul>
+                    <li>No. 14 Florida State's 77-3 offensive clinic over East Texas A&M</li>
+                    <li>No. 6 Oregon drubbing Oklahoma State 69-3</li>
+                    <li>No. 1 Ohio State blanking Grambling State 70-0</li>
+                    <li>No. 2 Penn State pitched a 34-0 shutout of FIU</li>
+                    <li>No. 8 Clemson survived Troy's upset bid in a 30-23 escape</li>
+                </ul>
+            </section>
+
+            <!-- Playoff Picture -->
+            <section class="section">
+                <h2>Updated Playoff Picture</h2>
+                <p>Two weeks in, the postseason race has already been upended by upsets. The AP Top 25 has a fresh look: No. 1 Ohio State remains the team to beat after two dominant wins (outscoring opponents 84-7), and No. 2 Penn State has quietly asserted itself as a bona fide challenger, riding a ferocious defense (back-to-back shutouts).</p>
+                
+                <p>Defending champ Georgia slipped to No. 6 despite a 2-0 start, as others leapfrogged them with more impressive showings. One of those is No. 4 Oregon, whose video-game offensive numbers (69 points this week) have them eyeing a playoff return. No. 3 LSU and No. 5 Miami round out the current top five – both undefeated, battle-tested, and looking every bit like contenders.</p>
+                
+                <div class="analytics-box">
+                    <h4>Playoff Race Analysis</h4>
+                    <p>The Big Ten boasts two powerhouse frontrunners (Ohio State and Penn State) on a collision course. The SEC's path looks more chaotic: Georgia remains a fixture, but Alabama is scrambling, LSU is surging, and even an outsider like Tennessee could crash the party. The Big 12 and Pac-12 hopes may rest on newcomers – Oklahoma and Oregon respectively – while the ACC's best bet might be Florida State or Miami.</p>
+                </div>
+            </section>
+
+            <!-- Looking Ahead -->
+            <section class="section">
+                <h2>Looking Ahead: Key Week 3 Matchups</h2>
+                <div class="game-card">
+                    <h3>No. 4 Georgia at No. 15 Tennessee (SEC Showdown)</h3>
+                    <p>A colossal early SEC test for the two-time defending champs. Georgia's dominant defense will face its first real challenge against the Volunteers' high-octane offense in hostile Knoxville. The Vols, fresh off a 72-point performance, will look to prove they belong in the playoff discussion.</p>
+                </div>
+                
+                <div class="game-card">
+                    <h3>No. 16 Texas A&M at No. 8 Notre Dame</h3>
+                    <p>A rare September heavyweight intersectional matchup. The Aggies, newly ranked, visit South Bend to take on a Fighting Irish squad smarting from an opening loss. It's a chance for Notre Dame to resurrect its season – or for Jimbo Fisher's Aggies to stake a claim as a playoff contender.</p>
+                </div>
+                
+                <div class="game-card">
+                    <h3>No. 18 South Florida at No. 5 Miami</h3>
+                    <p>Yes, you read that right – ranked USF on the road at undefeated Miami. The Bulls will try to slay a third straight giant, but this might be their toughest task yet. Miami's defense is far more athletic than Florida's, and the Hurricanes' offense (43.5 PPG so far) will test USF's improving unit.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- AP Top 10 -->
+            <div class="sidebar-card">
+                <h3>AP Top 10</h3>
+                <ol class="rankings-list">
+                    <li class="ranking-item">
+                        <span class="ranking-number">1</span>
+                        <span class="ranking-team">Ohio State</span>
+                        <span class="ranking-change">—</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">2</span>
+                        <span class="ranking-team">Penn State</span>
+                        <span class="ranking-change ranking-up">↑2</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">3</span>
+                        <span class="ranking-team">LSU</span>
+                        <span class="ranking-change ranking-up">↑1</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">4</span>
+                        <span class="ranking-team">Oregon</span>
+                        <span class="ranking-change ranking-up">↑2</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">5</span>
+                        <span class="ranking-team">Miami</span>
+                        <span class="ranking-change ranking-up">↑3</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">6</span>
+                        <span class="ranking-team">Georgia</span>
+                        <span class="ranking-change ranking-down">↓3</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">7</span>
+                        <span class="ranking-team">Texas</span>
+                        <span class="ranking-change ranking-down">↓2</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">8</span>
+                        <span class="ranking-team">Notre Dame</span>
+                        <span class="ranking-change ranking-down">↓1</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">9</span>
+                        <span class="ranking-team">USC</span>
+                        <span class="ranking-change ranking-up">↑1</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">10</span>
+                        <span class="ranking-team">Florida State</span>
+                        <span class="ranking-change ranking-up">↑4</span>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Heisman Watch -->
+            <div class="sidebar-card">
+                <h3>Heisman Watch</h3>
+                <ol class="rankings-list">
+                    <li class="ranking-item">
+                        <span class="ranking-number">1</span>
+                        <span class="ranking-team">John Mateer, OU</span>
+                        <span class="ranking-change ranking-new">NEW</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">2</span>
+                        <span class="ranking-team">Arch Manning, TEX</span>
+                        <span class="ranking-change ranking-up">↑1</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">3</span>
+                        <span class="ranking-team">Tommy Castellanos, FSU</span>
+                        <span class="ranking-change ranking-up">↑2</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">4</span>
+                        <span class="ranking-team">Julian Sayin, OSU</span>
+                        <span class="ranking-change">—</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">5</span>
+                        <span class="ranking-team">Byrum Brown, USF</span>
+                        <span class="ranking-change ranking-new">NEW</span>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Biggest Movers -->
+            <div class="sidebar-card">
+                <h3>Biggest Movers</h3>
+                <ol class="rankings-list">
+                    <li class="ranking-item">
+                        <span class="ranking-team">USF</span>
+                        <span class="ranking-change ranking-new">NEW #18</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-team">Oklahoma</span>
+                        <span class="ranking-change ranking-up">↑5 to #13</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-team">Missouri</span>
+                        <span class="ranking-change ranking-new">NEW #25</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-team">SMU</span>
+                        <span class="ranking-change ranking-down">OUT</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-team">Arizona State</span>
+                        <span class="ranking-change ranking-down">OUT</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-team">Florida</span>
+                        <span class="ranking-change ranking-down">OUT</span>
+                    </li>
+                </ol>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

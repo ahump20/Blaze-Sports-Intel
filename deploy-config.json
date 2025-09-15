@@ -1,0 +1,49 @@
+{
+  "deployment": {
+    "platforms": {
+      "vercel": {
+        "enabled": true,
+        "domain": "blaze-intelligence.vercel.app",
+        "framework": "node",
+        "buildCommand": "npm run build",
+        "outputDirectory": "public",
+        "nodeVersion": "18.x"
+      },
+      "github_pages": {
+        "enabled": true,
+        "domain": "blaze-intelligence.github.io",
+        "source": "docs",
+        "customDomain": "blaze-intelligence.com"
+      },
+      "aws_websocket": {
+        "enabled": true,
+        "region": "us-east-1",
+        "stage": "production",
+        "cloudFormationTemplate": "aws/websocket-template.yml"
+      }
+    },
+    "environment": {
+      "production": {
+        "NODE_ENV": "production",
+        "DATABASE_URL": "${VERCEL_POSTGRES_URL}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}",
+        "AWS_WEBSOCKET_ENDPOINT": "${AWS_WEBSOCKET_ENDPOINT}"
+      }
+    },
+    "build": {
+      "scripts": {
+        "prebuild": "npm ci",
+        "build": "npm run build:production",
+        "postbuild": "npm run optimize"
+      },
+      "optimization": {
+        "minifyJS": true,
+        "minifyCSS": true,
+        "compressImages": true,
+        "bundleAnalysis": true
+      }
+    }
+  }
+}

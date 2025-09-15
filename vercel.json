@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "name": "blaze-intelligence",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/enhanced-platform.html",
+      "dest": "/public/enhanced-platform.html"
+    },
+    {
+      "src": "/dashboard.html",
+      "dest": "/public/dashboard.html"
+    },
+    {
+      "src": "/pressure-dashboard.html",
+      "dest": "/public/pressure-dashboard.html"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/uploads/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "DATABASE_URL": "@database-url",
+    "OPENAI_API_KEY": "@openai-api-key",
+    "ANTHROPIC_API_KEY": "@anthropic-api-key",
+    "STRIPE_SECRET_KEY": "@stripe-secret-key",
+    "AWS_WEBSOCKET_ENDPOINT": "@aws-websocket-endpoint"
+  },
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
+  },
+  "regions": ["iad1"],
+  "framework": null,
+  "outputDirectory": "public"
+}
