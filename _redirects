@@ -1,0 +1,60 @@
+# Cloudflare Pages Redirects Configuration
+# Production-ready routing for Blaze Ranch Analytics
+
+# Root redirects
+/ /blaze-ranch-production.html 200
+/index /blaze-ranch-production.html 200
+/home /blaze-ranch-production.html 200
+
+# Legacy URL support
+/blaze-intelligence-enhanced.html /blaze-ranch-production.html 301
+/enhanced /blaze-ranch-production.html 301
+/portal /blaze-ranch-production.html 301
+
+# Team-specific pages
+/cardinals /blaze-ranch-production.html#teams 200
+/titans /blaze-ranch-production.html#teams 200  
+/longhorns /blaze-ranch-production.html#teams 200
+/grizzlies /blaze-ranch-production.html#teams 200
+
+# Analytics sections
+/analytics /blaze-ranch-production.html#analytics 200
+/scores /blaze-ranch-production.html#scores 200
+/insights /blaze-ranch-production.html#insights 200
+/data /blaze-ranch-production.html#analytics 200
+
+# API routes (preserve for future backend)
+/api/teams/* /api/teams/:splat 200
+/api/scores/* /api/scores/:splat 200
+/api/feed/* /api/feed/:splat 200
+
+# Static assets with fallbacks
+/assets/* /assets/:splat 200
+/images/* /images/:splat 200
+/fonts/* /fonts/:splat 200
+/textures/* /textures/:splat 200
+
+# JavaScript modules
+/js/* /:splat 200
+/scripts/* /:splat 200
+/modules/* /:splat 200
+
+# Handle missing files
+/favicon.ico /assets/favicon.ico 200
+/robots.txt /robots.txt 200
+/sitemap.xml /sitemap.xml 200
+
+# Error pages
+/404 /blaze-ranch-production.html 200
+/error /blaze-ranch-production.html 200
+
+# Development and admin redirects
+/admin/* /blaze-ranch-production.html 401
+/dev/* /blaze-ranch-production.html 401
+/test/* /blaze-ranch-production.html 401
+
+# External link handling (for analytics)
+/track/* https://analytics.blaze-intelligence-platform.pages.dev/:splat 302
+
+# Fallback - all other routes to main page
+/* /blaze-ranch-production.html 200

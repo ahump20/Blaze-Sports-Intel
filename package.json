@@ -1,85 +1,101 @@
 {
-  "name": "blaze-intelligence",
-  "version": "2.0.0",
-  "description": "Professional-grade sports analytics platform with real-time performance tracking and AI-powered insights",
-  "main": "server.js",
-  "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "build": "npm run build:production",
-    "build:production": "node scripts/build-production.js",
-    "optimize": "node scripts/optimize-assets.js",
-    "deploy:vercel": "vercel --prod",
-    "deploy:github": "npm run build && gh-pages -d docs",
-    "deploy:aws": "aws cloudformation deploy --template-body file://aws/websocket-template.yml --stack-name blaze-intelligence-websocket --capabilities CAPABILITY_IAM",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "blaze-ranch-analytics",
+  "version": "1.0.0",
+  "description": "Blaze Ranch Analytics - Where Heritage Meets Intelligence",
+  "main": "blaze-ranch-production.html",
+  "homepage": "https://blaze-intelligence-platform.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahump20/blaze-intelligence-platform"
   },
   "keywords": [
-    "sports",
-    "analytics",
-    "AI",
-    "performance",
-    "tracking",
-    "baseball",
-    "football",
-    "basketball"
+    "sports-analytics",
+    "three.js",
+    "data-visualization", 
+    "mlb",
+    "nfl", 
+    "nba",
+    "ncaa",
+    "cardinals",
+    "titans",
+    "longhorns",
+    "grizzlies"
   ],
-  "author": "Blaze Intelligence",
-  "license": "ISC",
+  "author": {
+    "name": "Austin Humphrey",
+    "email": "ahump20@outlook.com",
+    "url": "https://blaze-intelligence-platform.pages.dev"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "build": "npm run minify && npm run optimize",
+    "minify": "terser blaze-sports-api.js -o blaze-sports-api.min.js -c -m",
+    "optimize": "node scripts/optimize-assets.js",
+    "deploy": "wrangler pages publish ./",
+    "deploy:staging": "wrangler pages publish ./ --env staging",
+    "deploy:production": "wrangler pages publish ./ --env production",
+    "test": "echo 'Testing Blaze Ranch Analytics...' && node scripts/test-apis.js",
+    "lint": "echo 'Linting HTML/CSS/JS...' && htmlhint *.html",
+    "validate": "node scripts/validate-data.js",
+    "start": "npm run dev",
+    "preview": "npm run build && npm run dev"
+  },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.37.0",
-    "@balldontlie/sdk": "^1.0.0",
-    "@stripe/react-stripe-js": "^4.0.2",
-    "@stripe/stripe-js": "^7.9.0",
-    "@types/memoizee": "^0.4.12",
-    "@types/node": "^24.3.1",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "axios": "^1.7.9",
-    "bcryptjs": "^2.4.3",
-    "canvas": "^3.2.0",
-    "child_process": "^1.0.2",
-    "compression": "^1.7.4",
-    "connect-pg-simple": "^10.0.0",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "express-rate-limit": "^7.4.1",
-    "express-session": "^1.18.2",
-    "express-validator": "^7.2.0",
-    "fluent-ffmpeg": "^2.1.3",
-    "helmet": "^8.0.0",
-    "ioredis": "^5.4.1",
-    "jimp": "^1.6.0",
-    "jsonwebtoken": "^9.0.2",
-    "memoizee": "^0.4.17",
-    "multer": "^1.4.5-lts.1",
-    "node-cache": "^5.1.2",
-    "node-fetch": "^3.3.2",
-    "openai": "^4.104.0",
-    "openid-client": "^6.8.0",
-    "passport": "^0.7.0",
-    "peer": "^1.0.2",
-    "pg": "^8.13.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "sharp": "^0.34.3",
-    "simple-peer": "^9.11.1",
-    "socket.io": "^4.8.1",
-    "stripe": "^17.7.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0",
-    "three": "^0.180.0",
-    "typescript": "^5.9.2",
-    "uuid": "^11.0.2",
-    "winston": "^3.17.0",
-    "winston-daily-rotate-file": "^5.0.0",
-    "ws": "^8.18.0",
-    "zeromq": "^6.5.0"
+    "three": "^0.156.1"
+  },
+  "devDependencies": {
+    "terser": "^5.19.4",
+    "htmlhint": "^1.1.4",
+    "wrangler": "^3.10.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "config": {
+    "api_endpoints": {
+      "mlb": "https://statsapi.mlb.com/api/v1",
+      "nfl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl",
+      "nba": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba", 
+      "ncaa": "https://site.api.espn.com/apis/site/v2/sports/football/college-football"
+    },
+    "teams": {
+      "cardinals": {
+        "id": 138,
+        "league": "MLB",
+        "colors": ["#C41E3A", "#FFFFFF"]
+      },
+      "titans": {
+        "id": 10,
+        "league": "NFL", 
+        "colors": ["#4B92DB", "#002244"]
+      },
+      "longhorns": {
+        "id": 251,
+        "league": "NCAA",
+        "colors": ["#BF5700", "#FFFFFF"]
+      },
+      "grizzlies": {
+        "id": 15,
+        "league": "NBA",
+        "colors": ["#5D76A9", "#12173F"]
+      }
+    }
+  },
+  "cloudflare": {
+    "account_id": "your-cloudflare-account-id",
+    "zone_id": "your-cloudflare-zone-id",
+    "pages": {
+      "project_name": "blaze-intelligence-platform",
+      "production_branch": "main",
+      "preview_branches": ["development", "staging"]
+    }
   }
 }

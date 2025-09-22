@@ -1,0 +1,42 @@
+name = "blaze-ranch-analytics"
+main = "src/index.js"
+compatibility_date = "2024-09-02"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "blaze-ranch-analytics"
+route = "blaze-intelligence-platform.pages.dev/*"
+
+[site]
+bucket = "./dist"
+entry-point = "workers-site"
+
+[[kv_namespaces]]
+binding = "BLAZE_CACHE"
+id = "blaze_analytics_cache_prod"
+preview_id = "blaze_analytics_cache_dev"
+
+[[r2_buckets]]
+binding = "SPORTS_DATA"
+bucket_name = "blaze-sports-data"
+
+[vars]
+API_BASE_URL = "https://blaze-intelligence-platform.pages.dev"
+ENVIRONMENT = "production"
+CACHE_TTL = "300"
+MAX_API_CALLS = "1000"
+
+[build]
+command = "npm run build"
+publish = "dist"
+
+[build.environment_variables]
+NODE_VERSION = "18"
+
+[[rules]]
+type = "ESModules"
+globs = ["**/*.js"]
+
+[[rules]]
+type = "Text"
+globs = ["**/*.html", "**/*.css"]
