@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import { CapabilityGrid } from "./components/CapabilityGrid";
+import { Differentiators } from "./components/Differentiators";
 import { ExperienceCenter } from "./components/ExperienceCenter";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -16,6 +17,7 @@ export const App: FC = () => (
     <Header />
     <main id="main-content">
       <Hero />
+      <Differentiators />
       <CapabilityGrid
         id="analytics"
         title="Command Center"
