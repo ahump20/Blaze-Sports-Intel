@@ -1,0 +1,55 @@
+.section {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.header {
+  max-width: 720px;
+}
+
+.header h2 {
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+}
+
+.header p {
+  color: #cbd5f5;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.iconWrapper {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #030712;
+}
+
+.card h3 {
+  margin: 0;
+}
+
+.card p {
+  margin: 0;
+  color: #e2e8f0;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

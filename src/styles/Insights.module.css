@@ -1,0 +1,47 @@
+.section {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.header {
+  max-width: 720px;
+}
+
+.header h2 {
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+}
+
+.header p {
+  color: #cbd5f5;
+}
+
+.list {
+  display: grid;
+  gap: 1.75rem;
+  margin: 0;
+}
+
+.item {
+  display: grid;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 1.75rem;
+}
+
+.item dt {
+  color: #22d3ee;
+  font-size: 1.5rem;
+}
+
+.title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+@media (min-width: 960px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
