@@ -1,0 +1,86 @@
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  padding-top: 6rem;
+}
+
+.copy {
+  max-width: 780px;
+}
+
+.kicker {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #38bdf8;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 4vw + 1rem, 4rem);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #cbd5f5;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.primaryAction {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #030712;
+}
+
+.secondaryAction {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #e5e7eb;
+}
+
+.metrics {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 520px;
+}
+
+.metrics dl {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.metrics dt {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.metrics dd {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: 3fr 2fr;
+    align-items: end;
+  }
+}

@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 0;
+  position: sticky;
+  top: 0;
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(16px);
+  z-index: 50;
+  gap: 1.5rem;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  font-size: 1.4rem;
+}
+
+.company {
+  font-weight: 700;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 0.875rem;
+  color: #cbd5f5;
+  margin: 0;
+}
+
+.navList {
+  display: none;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.navLink:hover,
+.navLink:focus {
+  color: #f97316;
+}
+
+.cta {
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #030712;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .navList {
+    display: flex;
+  }
+
+  .header {
+    padding: 1.5rem 6rem 0;
+  }
+}
