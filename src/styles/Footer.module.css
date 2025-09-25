@@ -43,7 +43,7 @@
     justify-content: flex-end;
   }
 
-  .footer p:last-child {
+  .copyright {
     grid-column: 1 / -1;
   }
 }
