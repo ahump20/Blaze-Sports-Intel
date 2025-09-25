@@ -1,0 +1,11 @@
+name = "blaze-worker-api"
+main = "src/index.ts"
+compatibility_date = "2024-10-01"
+
+[[kv_namespaces]]
+binding = "BLAZE_KV_NAMESPACE"
+id = "<kv-id>"
+
+[vars]
+RATE_LIMIT_REQUESTS_PER_MINUTE = 60
+CACHE_TTL_SECONDS = 90

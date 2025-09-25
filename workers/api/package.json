@@ -1,0 +1,24 @@
+{
+  "name": "@blaze/worker-api",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@blaze/core": "workspace:*",
+    "@blaze/providers": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241022.0",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.1",
+    "typescript": "^5.5.4",
+    "wrangler": "^3.78.7"
+  }
+}
