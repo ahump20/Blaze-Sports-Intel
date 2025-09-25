@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
@@ -66,6 +67,11 @@ console.log(`   🔐 Legacy Auth: ${FEATURE_FLAGS.LEGACY_AUTH_ENABLED ? '✅ ENA
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const videoUploadDir = path.join(__dirname, 'uploads', 'video-analysis');
+if (!fs.existsSync(videoUploadDir)) {
+  fs.mkdirSync(videoUploadDir, { recursive: true });
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -129,7 +135,7 @@ const integrationService = enhancedIntegrationService;
 
 // Configure multer for video uploads
 const upload = multer({
-  dest: './uploads/video-analysis/',
+  dest: videoUploadDir,
   limits: {
     fileSize: 500 * 1024 * 1024 // 500MB
   },
@@ -171,13 +177,40 @@ app.use(helmet({
 }));
 app.use(compression());
 
-// CORS configuration - allow all origins for development
+// CORS configuration with environment-driven allowlist
+const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS ?? '')
+  .split(',')
+  .map(origin => origin.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: true,
+  origin: (origin, callback) => {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.length === 0 && process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Origin not allowed by CORS policy'), false);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Dev-Mode', 'X-Client-Version', 'X-Batch-Size']
 }));
+
+app.use((err, req, res, next) => {
+  if (err instanceof Error && err.message === 'Origin not allowed by CORS policy') {
+    return res.status(403).json({ error: err.message });
+  }
+
+  return next(err);
+});
 
 app.use(express.json());
 app.use(cookieParser());
@@ -296,8 +329,7 @@ if (FEATURE_FLAGS.VISUAL_INFERENCE_ENABLED) {
 // Add tracking middleware for authenticated requests
 app.use('/api/protected', authenticateToken, trackApiUsage);
 
-// Serve static files from both root and public directories
-app.use(express.static(__dirname));
+// Serve static files from public directory only
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Cache control headers to prevent caching issues in Replit
@@ -397,144 +429,6 @@ app.get('/digital-combine-original', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'digital-combine.html'));
 });
 
-// Digital Combine™ session storage
-const digitalCombineSessions = new Map();
-
-// Digital Combine™ API endpoints
-app.post('/api/digital-combine/upload', upload.single('video'), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No video file uploaded' });
-    }
-    
-    const sessionId = uuidv4();
-    const config = {
-      sport: req.body.sport || 'baseball',
-      playerName: req.body.playerName || 'Athlete',
-      position: req.body.position || 'Unknown',
-      analysisType: 'comprehensive',
-      expertiseLevel: 'professional'
-    };
-    
-    console.log(`🏆 Digital Combine™ upload initiated:`);
-    console.log(`📹 File: ${req.file.originalname} (${req.file.size} bytes)`);
-    console.log(`🏃 Athlete: ${config.playerName} - ${config.sport}`);
-    console.log(`🎯 Expert Analysis by Austin Humphrey`);
-    
-    // Start video analysis
-    const jobId = await videoAnalysisEngine.processVideo(req.file.path, config);
-    
-    // Store session
-    digitalCombineSessions.set(sessionId, {
-      sessionId,
-      jobId,
-      uploadedAt: new Date(),
-      config,
-      filePath: req.file.path,
-      fileName: req.file.originalname,
-      fileSize: req.file.size,
-      status: 'processing'
-    });
-    
-    res.json({
-      sessionId,
-      jobId,
-      status: 'processing',
-      message: 'Digital Combine™ analysis initiated - Austin Humphrey expertise applied',
-      estimatedCompletion: new Date(Date.now() + 4 * 60 * 1000), // 4 minutes
-      config
-    });
-    
-  } catch (error) {
-    console.error('🚨 Digital Combine™ upload error:', error);
-    res.status(500).json({ 
-      error: 'Upload failed', 
-      details: error.message 
-    });
-  }
-});
-
-app.get('/api/digital-combine/status/:sessionId', (req, res) => {
-  try {
-    const { sessionId } = req.params;
-    const session = digitalCombineSessions.get(sessionId);
-    
-    if (!session) {
-      return res.status(404).json({ error: 'Session not found' });
-    }
-    
-    const jobStatus = videoAnalysisEngine.getJobStatus(session.jobId);
-    
-    if (!jobStatus) {
-      return res.status(404).json({ error: 'Analysis job not found' });
-    }
-    
-    res.json({
-      sessionId,
-      status: jobStatus.status,
-      progress: jobStatus.progress,
-      estimatedCompletion: jobStatus.estimatedCompletion,
-      config: session.config,
-      processingStages: jobStatus.processingStages || [],
-      expert: 'Austin Humphrey - Deep South Sports Authority'
-    });
-    
-  } catch (error) {
-    console.error('Digital Combine™ status error:', error);
-    res.status(500).json({ error: 'Status check failed' });
-  }
-});
-
-app.get('/api/digital-combine/results/:sessionId', (req, res) => {
-  try {
-    const { sessionId } = req.params;
-    const session = digitalCombineSessions.get(sessionId);
-    
-    if (!session) {
-      return res.status(404).json({ error: 'Session not found' });
-    }
-    
-    const jobStatus = videoAnalysisEngine.getJobStatus(session.jobId);
-    
-    if (!jobStatus || jobStatus.status !== 'completed') {
-      return res.status(202).json({ 
-        message: 'Analysis still in progress',
-        status: jobStatus?.status || 'unknown',
-        progress: jobStatus?.progress || 0
-      });
-    }
-    
-    // Enhanced results with Austin Humphrey's expertise
-    const results = {
-      ...jobStatus.results,
-      sessionInfo: {
-        sessionId,
-        uploadedAt: session.uploadedAt,
-        config: session.config,
-        fileName: session.fileName,
-        fileSize: session.fileSize
-      },
-      expertCredentials: {
-        analyst: 'Austin Humphrey',
-        background: 'Texas Running Back #20 & Perfect Game Elite',
-        authority: 'Deep South Sports Authority',
-        specialization: session.config.sport === 'baseball' ? 'Perfect Game Scouting' : 'SEC-Level Performance'
-      },
-      businessValue: {
-        reportType: 'Professional Digital Combine™ Analysis',
-        marketValue: '$2,500 equivalent analysis',
-        useCase: 'College recruitment and performance development'
-      }
-    };
-    
-    console.log(`✅ Digital Combine™ results delivered: ${sessionId}`);
-    res.json(results);
-    
-  } catch (error) {
-    console.error('Digital Combine™ results error:', error);
-    res.status(500).json({ error: 'Results retrieval failed' });
-  }
-});
 
 // Sample analysis endpoints for demonstration
 app.post('/api/digital-combine/demo', async (req, res) => {
@@ -954,20 +848,34 @@ app.get('/api/game/pressure-stream', (req, res) => {
 });
 
 // Digital Combine API endpoints
-const dcRoutes = digitalCombineBackend.createExpressRoutes();
+if (FEATURE_FLAGS.VISUAL_INFERENCE_ENABLED) {
+  const dcRoutes = digitalCombineBackend.createExpressRoutes();
 
-// Video upload and analysis endpoints
-app.post('/api/digital-combine/upload', dcRoutes.upload, dcRoutes.processUpload);
-app.get('/api/digital-combine/results/:sessionId', dcRoutes.getResults);
-app.get('/api/digital-combine/status/:sessionId', dcRoutes.getStatus);
+  // Video upload and analysis endpoints
+  app.post('/api/digital-combine/upload', dcRoutes.upload, dcRoutes.processUpload);
+  app.get('/api/digital-combine/results/:sessionId', dcRoutes.getResults);
+  app.get('/api/digital-combine/status/:sessionId', dcRoutes.getStatus);
+} else {
+  const visualInferenceDisabled = (req, res) => {
+    res.status(503).json({ error: 'Visual inference disabled' });
+  };
+
+  app.post('/api/digital-combine/upload', visualInferenceDisabled);
+  app.get('/api/digital-combine/results/:sessionId', visualInferenceDisabled);
+  app.get('/api/digital-combine/status/:sessionId', visualInferenceDisabled);
+}
 
 // Digital Combine health endpoint
 app.get('/api/digital-combine/health', async (req, res) => {
+  if (!FEATURE_FLAGS.VISUAL_INFERENCE_ENABLED) {
+    return res.json({ status: 'disabled', timestamp: new Date().toISOString() });
+  }
+
   try {
     const queueStatus = await pool.query(
       'SELECT COUNT(*) as total, COUNT(CASE WHEN status = \'pending\' THEN 1 END) as pending FROM dc_processing_queue WHERE created_at > NOW() - INTERVAL \'24 hours\''
     );
-    
+
     res.json({
       status: 'healthy',
       queueStatus: {
@@ -1648,9 +1556,13 @@ console.log('✅ Mounted pressure analytics routes at /api/pressure');
 // Video Intelligence API Routes
 app.post('/api/video-intelligence/analyze', upload.single('video'), async (req, res) => {
   try {
+    if (!videoAnalysisEngine) {
+      return res.status(503).json({ error: 'Visual inference disabled' });
+    }
+
     const { config } = req.body;
     const videoFile = req.file;
-    
+
     if (!videoFile) {
       return res.status(400).json({ error: 'No video file provided' });
     }
@@ -1676,6 +1588,10 @@ app.post('/api/video-intelligence/analyze', upload.single('video'), async (req, 
 
 app.get('/api/video-intelligence/job/:jobId', async (req, res) => {
   try {
+    if (!videoAnalysisEngine) {
+      return res.status(503).json({ error: 'Visual inference disabled' });
+    }
+
     const job = videoAnalysisEngine.getJobStatus(req.params.jobId);
     if (!job) {
       return res.status(404).json({ error: 'Job not found' });
@@ -1689,6 +1605,10 @@ app.get('/api/video-intelligence/job/:jobId', async (req, res) => {
 
 app.get('/api/video-intelligence/jobs', async (req, res) => {
   try {
+    if (!videoAnalysisEngine) {
+      return res.status(503).json({ error: 'Visual inference disabled' });
+    }
+
     const jobs = videoAnalysisEngine.getAllJobs();
     res.json({ jobs });
   } catch (error) {
