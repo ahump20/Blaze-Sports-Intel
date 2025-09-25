@@ -1,0 +1,72 @@
+.wrapper {
+  display: grid;
+  gap: clamp(2rem, 3vw, 3.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: center;
+  padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  background: radial-gradient(circle at 20% 20%, rgba(191, 87, 0, 0.18), rgba(5, 7, 11, 0.9)),
+    linear-gradient(135deg, rgba(10, 15, 24, 0.95), rgba(5, 7, 11, 0.98));
+  border-radius: 32px;
+  border: 1px solid rgba(191, 87, 0, 0.35);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: #eef3ff;
+}
+
+.kicker {
+  letter-spacing: 0.4em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: rgba(191, 87, 0, 0.8);
+}
+
+.title {
+  font-size: clamp(1.75rem, 2.6vw, 2.8rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0;
+  color: rgba(237, 240, 247, 0.78);
+  font-size: 1rem;
+  max-width: 42ch;
+}
+
+.viewport {
+  aspect-ratio: 4 / 3;
+  min-height: 320px;
+  width: 100%;
+  border-radius: 24px;
+  border: 1px solid rgba(237, 240, 247, 0.12);
+  background: radial-gradient(circle at center, rgba(191, 87, 0, 0.35), rgba(4, 6, 10, 0.95));
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.viewport canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+}

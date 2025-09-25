@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { CapabilityGrid } from "./components/CapabilityGrid";
 import { ExperienceCenter } from "./components/ExperienceCenter";
 import { Footer } from "./components/Footer";
+import { GraphicsShowcase } from "./components/GraphicsShowcase";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Insights } from "./components/Insights";
@@ -16,6 +17,7 @@ export const App: FC = () => (
     <Header />
     <main id="main-content">
       <Hero />
+      <GraphicsShowcase />
       <CapabilityGrid
         id="analytics"
         title="Command Center"
