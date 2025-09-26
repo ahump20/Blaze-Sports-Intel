@@ -31,8 +31,12 @@
   <div id="canvasWrap"></div>
 
   <!-- Non-module, global THREE build + OrbitControls (avoids file:// module issues) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/examples/js/controls/OrbitControls.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"
+          integrity="sha512-+wQwQ6VykBLL8GMDIS9ZhDJW60F7uO3cu6UytzszbmWzxubUoilKx2oyS9MhUlCT3VkOITkkpFmS6r30YIOCwA=="
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/examples/js/controls/OrbitControls.min.js"
+          integrity="sha512-+Qw7gxYkWwaP42gnikIze8ih/7gToYtL6vhfVqlhK/SXxPxq8np5xpoE2mR7BncpsbR9f7DmqDveoxu48UUfGg=="
+          crossorigin="anonymous"></script>
 
   <script>
   // ---------------------------
