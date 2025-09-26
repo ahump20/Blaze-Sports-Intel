@@ -1,5 +1,17 @@
-const defaultCache = (): Cache => (caches as unknown as { default: Cache }).default;
+function getDefaultCache(): Cache {
+  if (
+    typeof caches === "object" &&
+    caches !== null &&
+    "default" in caches &&
+    typeof (caches as any).default === "object" &&
+    (caches as any).default !== null
+  ) {
+    return (caches as { default: Cache }).default;
+  }
+  throw new Error("Cloudflare default cache is not available in this environment.");
+}
 
+const defaultCache = (): Cache => getDefaultCache();
 export const cacheKey = (prefix: string, url: string): string => `${prefix}:${new URL(url).toString()}`;
 
 export async function cachedFetch(request: Request, ttlSeconds: number): Promise<Response> {
