@@ -1,0 +1,55 @@
+{
+  "name": "Blaze Sports Intelligence",
+  "short_name": "Blaze Sports",
+  "description": "Elite sports analytics platform that transforms raw athletic data into championship insights.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0F",
+  "theme_color": "#BF5700",
+  "orientation": "portrait-primary",
+  "categories": ["sports", "analytics", "productivity"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/generated-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/generated-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/Platform_metrics_dashboard_b0aa0dd2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Blaze Intelligence Command Center"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Command Center",
+      "short_name": "Command",
+      "description": "Access the main analytics dashboard",
+      "url": "/analytics",
+      "icons": [{ "src": "/generated-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Experience Center",
+      "short_name": "Experience",
+      "description": "Sports-specific showcases",
+      "url": "/experience",
+      "icons": [{ "src": "/generated-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "scope": "/",
+  "id": "blaze-sports-intelligence",
+  "prefer_related_applications": false
+}
