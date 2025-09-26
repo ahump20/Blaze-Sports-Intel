@@ -1,15 +1,15 @@
 function getDefaultCache(): Cache {
   const defaultCacheObj = (caches as { default: unknown }).default;
   if (
-    typeof caches === "object" &&
+    typeof caches === 'object' &&
     caches !== null &&
-    "default" in caches &&
-    typeof defaultCacheObj === "object" &&
-    defaultCacheObj !== null
+    'default' in caches &&
+    typeof (caches as { default: unknown }).default === 'object' &&
+    (caches as { default: unknown }).default !== null
   ) {
-    return defaultCacheObj as Cache;
+    return (caches as { default: Cache }).default;
   }
-  throw new Error("Cloudflare default cache is not available in this environment.");
+  throw new Error('Cloudflare default cache is not available in this environment.');
 }
 
 const defaultCache = (): Cache => getDefaultCache();
