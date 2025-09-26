@@ -19,6 +19,11 @@ fi
 
 # Activate virtual environment
 source venv/bin/activate 2>/dev/null || . venv/Scripts/activate 2>/dev/null
+if [ $? -ne 0 ]; then
+    echo "❌ ERROR: Failed to activate the virtual environment. Neither 'venv/bin/activate' nor 'venv/Scripts/activate' was found."
+    echo "Please check that the virtual environment was created successfully."
+    exit 1
+fi
 
 # Install/update dependencies
 echo "Installing dependencies..."
