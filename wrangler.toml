@@ -1,11 +1,15 @@
-name = "blaze-ranch-analytics"
+name = "blaze-sports-intel"
 main = "src/index.js"
 compatibility_date = "2024-09-02"
 compatibility_flags = ["nodejs_compat"]
 
 [env.production]
-name = "blaze-ranch-analytics"
-route = "blaze-intelligence-platform.pages.dev/*"
+name = "blaze-sports-intel"
+route = "blazesportsintel.com/*"
+
+[env.staging]
+name = "blaze-sports-intel-staging"
+route = "staging.blazesportsintel.com/*"
 
 [site]
 bucket = "./dist"
@@ -21,7 +25,7 @@ binding = "SPORTS_DATA"
 bucket_name = "blaze-sports-data"
 
 [vars]
-API_BASE_URL = "https://blaze-intelligence-platform.pages.dev"
+API_BASE_URL = "https://blazesportsintel.com"
 ENVIRONMENT = "production"
 CACHE_TTL = "300"
 MAX_API_CALLS = "1000"

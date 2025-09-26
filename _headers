@@ -1,5 +1,5 @@
 # Cloudflare Pages Headers Configuration
-# Optimized for Blaze Ranch Analytics production deployment
+# Optimized for Blaze Sports Intelligence production deployment at blazesportsintel.com
 
 /*
   # Security Headers
@@ -8,6 +8,8 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https: wss:; frame-ancestors 'none'
   
   # CORS Headers for Sports APIs
   Access-Control-Allow-Origin: *
@@ -19,7 +21,7 @@
   Cache-Control: public, max-age=3600, s-maxage=7200
   Vary: Accept-Encoding
   
-  # WebGL Support
+  # WebGL and Three.js Support
   Cross-Origin-Embedder-Policy: unsafe-none
   Cross-Origin-Opener-Policy: same-origin
 
@@ -37,9 +39,14 @@
   Cache-Control: public, max-age=86400, s-maxage=172800
   Content-Type: text/css; charset=utf-8
   
-# HTML Files - Short Cache
+# HTML Files - Short Cache for SPA
 /*.html
-  Cache-Control: public, max-age=3600, s-maxage=7200
+  Cache-Control: public, max-age=300, s-maxage=600
+  Content-Type: text/html; charset=utf-8
+  
+# Root HTML - No Cache for SPA updates
+/
+  Cache-Control: no-cache, no-store, must-revalidate
   Content-Type: text/html; charset=utf-8
   
 # API Endpoints - No Cache
@@ -63,14 +70,9 @@
   Cache-Control: public, max-age=2592000, s-maxage=5184000
   Vary: Accept
   
-# Three.js Assets - Long Cache
-/textures/*
-  Cache-Control: public, max-age=2592000, immutable
-  Access-Control-Allow-Origin: *
-  
-/models/*
-  Cache-Control: public, max-age=2592000, immutable
-  Access-Control-Allow-Origin: *
+# Generated Assets - Long Cache
+/generated-*
+  Cache-Control: public, max-age=31536000, immutable
   
 # Service Worker - No Cache
 /sw.js
