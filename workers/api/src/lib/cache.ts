@@ -3,8 +3,8 @@ function getDefaultCache(): Cache {
     typeof caches === "object" &&
     caches !== null &&
     "default" in caches &&
-    typeof (caches as any).default === "object" &&
-    (caches as any).default !== null
+    typeof (caches as { default: unknown }).default === "object" &&
+    (caches as { default: unknown }).default !== null
   ) {
     return (caches as { default: Cache }).default;
   }
