@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://blazesportsintel.com/sitemap.xml
+
+# Block admin and development paths
+Disallow: /admin/
+Disallow: /dev/
+Disallow: /test/
+Disallow: /staging/
+Disallow: /.env
+Disallow: /api/internal/
+
+# Block temporary and asset directories
+Disallow: /assets/temp/
+Disallow: /node_modules/
+Disallow: /dist/
+
+# Allow important assets
+Allow: /assets/images/
+Allow: /docs/
+
+# Crawl delay for respectful scraping
+Crawl-delay: 1

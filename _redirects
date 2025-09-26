@@ -1,60 +1,71 @@
 # Cloudflare Pages Redirects Configuration
-# Production-ready routing for Blaze Ranch Analytics
+# Production routing for Blaze Sports Intelligence at blazesportsintel.com
 
-# Root redirects
-/ /blaze-ranch-production.html 200
-/index /blaze-ranch-production.html 200
-/home /blaze-ranch-production.html 200
+# Root redirects - SPA routing
+/ /index.html 200
+/index /index.html 200
+/home /index.html 200
 
-# Legacy URL support
-/blaze-intelligence-enhanced.html /blaze-ranch-production.html 301
-/enhanced /blaze-ranch-production.html 301
-/portal /blaze-ranch-production.html 301
+# Legacy URL support - redirect to main SPA
+/blaze-intelligence-enhanced.html / 301
+/enhanced / 301
+/portal / 301
+/ranch / 301
 
-# Team-specific pages
-/cardinals /blaze-ranch-production.html#teams 200
-/titans /blaze-ranch-production.html#teams 200  
-/longhorns /blaze-ranch-production.html#teams 200
-/grizzlies /blaze-ranch-production.html#teams 200
+# Team-specific pages - handled by React router
+/cardinals /index.html 200
+/titans /index.html 200  
+/longhorns /index.html 200
+/grizzlies /index.html 200
 
-# Analytics sections
-/analytics /blaze-ranch-production.html#analytics 200
-/scores /blaze-ranch-production.html#scores 200
-/insights /blaze-ranch-production.html#insights 200
-/data /blaze-ranch-production.html#analytics 200
+# Analytics sections - SPA routes
+/analytics /index.html 200
+/command /index.html 200
+/experience /index.html 200
+/pipeline /index.html 200
+/insights /index.html 200
+
+# Content pages
+/manifesto /index.html 200
+/about /index.html 200
+/contact /index.html 200
 
 # API routes (preserve for future backend)
 /api/teams/* /api/teams/:splat 200
-/api/scores/* /api/scores/:splat 200
-/api/feed/* /api/feed/:splat 200
+/api/scores/* /api/scores/:splat 200  
+/api/data/* /api/data/:splat 200
 
 # Static assets with fallbacks
 /assets/* /assets/:splat 200
-/images/* /images/:splat 200
-/fonts/* /fonts/:splat 200
-/textures/* /textures/:splat 200
+/images/* /assets/images/:splat 200
+/fonts/* /assets/fonts/:splat 200
+/docs/* /docs/:splat 200
 
-# JavaScript modules
-/js/* /:splat 200
-/scripts/* /:splat 200
-/modules/* /:splat 200
-
-# Handle missing files
-/favicon.ico /assets/favicon.ico 200
+# Favicon and meta files
+/favicon.ico /generated-icon.png 200
+/apple-touch-icon.png /generated-icon.png 200
 /robots.txt /robots.txt 200
 /sitemap.xml /sitemap.xml 200
 
-# Error pages
-/404 /blaze-ranch-production.html 200
-/error /blaze-ranch-production.html 200
+# Handle common 404s
+/wp-admin/* / 404
+/admin/* / 404
+/wp-login.php / 404
+/.env / 404
 
-# Development and admin redirects
-/admin/* /blaze-ranch-production.html 401
-/dev/* /blaze-ranch-production.html 401
-/test/* /blaze-ranch-production.html 401
+# Development and admin redirects (security)
+/dev/* / 401
+/test/* / 401
+/staging/* / 401
 
-# External link handling (for analytics)
-/track/* https://analytics.blaze-intelligence-platform.pages.dev/:splat 302
+# External integrations
+/linkedin https://linkedin.com/company/blaze-intelligence 302
+/twitter https://twitter.com/blazeintel 302
+/github https://github.com/ahump20/Blaze-Sports-Intel 302
 
-# Fallback - all other routes to main page
-/* /blaze-ranch-production.html 200
+# Email contact
+/email mailto:austin@blazesportsintel.com 302
+/contact-email mailto:austin@blazesportsintel.com 302
+
+# SPA fallback - all other routes to main app
+/* /index.html 200
