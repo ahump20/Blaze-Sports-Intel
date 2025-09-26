@@ -4,7 +4,7 @@ compatibility_date = "2024-10-01"
 
 [[kv_namespaces]]
 binding = "BLAZE_KV_NAMESPACE"
-id = "<kv-id>"
+id = "${BLAZE_KV_NAMESPACE_ID}"
 
 [vars]
 RATE_LIMIT_REQUESTS_PER_MINUTE = 60
