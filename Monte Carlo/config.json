@@ -1,0 +1,70 @@
+{
+  "simulation": {
+    "n_simulations": 10000,
+    "random_seed": 42
+  },
+  "subscription_tiers": {
+    "basic": {
+      "price_range": [29, 49],
+      "subscriber_range": [50, 300]
+    },
+    "pro": {
+      "price_range": [99, 149],
+      "subscriber_range": [20, 100]
+    },
+    "enterprise": {
+      "price_range": [499, 999],
+      "subscriber_range": [5, 25]
+    }
+  },
+  "api_revenue": {
+    "monthly_base_range": [500, 2000],
+    "per_call_revenue_range": [0.001, 0.01],
+    "monthly_calls_range": [100000, 1000000]
+  },
+  "custom_projects": {
+    "projects_per_month_range": [1, 5],
+    "project_value_range": [2000, 15000]
+  },
+  "data_licensing": {
+    "annual_deals_range": [2, 8],
+    "deal_value_range": [10000, 50000]
+  },
+  "operating_costs": {
+    "infrastructure_monthly_range": [500, 1500],
+    "data_acquisition_range": [1000, 3000],
+    "personnel_allocation_range": [2000, 5000],
+    "marketing_monthly_range": [500, 2000]
+  },
+  "market_factors": {
+    "seasonality_factor_range": [0.7, 1.3],
+    "market_growth_rate_range": [0.98, 1.15],
+    "churn_rate_range": [0.02, 0.08],
+    "automation_savings_range": [0.1, 0.3],
+    "platform_efficiency_range": [1.0, 1.5]
+  },
+  "sports_impacts": {
+    "baseball": {
+      "range": [0.9, 1.4],
+      "weight": 0.35
+    },
+    "football": {
+      "range": [0.8, 1.3],
+      "weight": 0.30
+    },
+    "basketball": {
+      "range": [0.7, 1.2],
+      "weight": 0.25
+    },
+    "track_field": {
+      "range": [0.5, 0.9],
+      "weight": 0.10
+    }
+  },
+  "assumptions": {
+    "hourly_value": 55,
+    "currency": "USD",
+    "time_period": "monthly",
+    "timezone": "America/Chicago"
+  }
+}
